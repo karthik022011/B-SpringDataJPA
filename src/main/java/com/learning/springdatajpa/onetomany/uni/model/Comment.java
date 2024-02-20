@@ -1,4 +1,4 @@
-package com.learning.springdatajpa.onetomany.uni;
+package com.learning.springdatajpa.onetomany.uni.model;
 
 import jakarta.persistence.*;
 
@@ -7,15 +7,15 @@ import jakarta.persistence.*;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long commentId;
     private String text;
 
-    public long getId() {
-        return id;
+    public long getCommentId() {
+        return commentId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setCommentId(long commentId) {
+        this.commentId = commentId;
     }
 
     public String getText() {

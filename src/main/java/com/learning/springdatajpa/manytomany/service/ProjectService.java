@@ -6,7 +6,6 @@ import com.learning.springdatajpa.manytomany.repository.EmployeeRepository;
 import com.learning.springdatajpa.manytomany.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +18,7 @@ public class ProjectService {
     private ProjectRepository projectRepository;
 
 
-    public Project createProject(@RequestBody Project entity) {
+    public Project createProject(Project entity) {
         // save Employee
         Project  employee = projectRepository.save(entity);
         return employee;

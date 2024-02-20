@@ -1,4 +1,4 @@
-package com.learning.springdatajpa.onetomany.uni;
+package com.learning.springdatajpa.onetomany.uni.model;
 
 import jakarta.persistence.*;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public class Post{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long postId;
 
     @Column(name = "title")
     private String title;
@@ -19,15 +19,17 @@ public class Post{
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pc_fid", referencedColumnName = "id")
+    @JoinColumn(name = "post_id", referencedColumnName = "postId")
     List< Comment > comments = new ArrayList< >();
+    // Uni-directional One to Many mapping -> One Post can have Many Comments
+    // Here, extra column 'post_id' will be created on the many side of the relationship i.e. in the Comments table
 
-    public long getId() {
-        return id;
+    public long getPostId() {
+        return postId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setPostId(long postId) {
+        this.postId = postId;
     }
 
     public String getTitle() {
