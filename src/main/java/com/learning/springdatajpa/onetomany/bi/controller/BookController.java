@@ -1,9 +1,7 @@
 package com.learning.springdatajpa.onetomany.bi.controller;
 
 
-import com.learning.springdatajpa.manytomany.model.Project;
-import com.learning.springdatajpa.manytomany.service.EmployeeService;
-import com.learning.springdatajpa.manytomany.service.ProjectService;
+import com.learning.springdatajpa.onetomany.bi.model.Author;
 import com.learning.springdatajpa.onetomany.bi.model.Book;
 import com.learning.springdatajpa.onetomany.bi.service.AuthorService;
 import com.learning.springdatajpa.onetomany.bi.service.BookService;
@@ -21,11 +19,23 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @PostMapping("/createProject")
+    @PostMapping("/createBook")
     public ResponseEntity<Book> createBook(@RequestBody Book entity) {
         // save Project
         Book project = bookService.createBook(entity);
         return ResponseEntity.ok(project);
     }
 
+    @PostMapping(value = "/createBook/{authorId}")
+    public ResponseEntity<Author> createBookAndAssignToAuthor(@RequestBody Book entity,
+                                                                @PathVariable(name = "authorId") Integer authorId) {
+        Author savedBook = bookService.createBookAndAssignToAuthor(entity, authorId);
+        return ResponseEntity.ok(savedBook);
+    }
+
 }
+
+//http://localhost:8081/api/book/createBook/1
+/*{
+        "title":"RichDad & PoorDad"
+}*/

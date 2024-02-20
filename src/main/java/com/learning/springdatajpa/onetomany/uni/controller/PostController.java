@@ -8,10 +8,7 @@ import com.learning.springdatajpa.onetomany.uni.service.CommentService;
 import com.learning.springdatajpa.onetomany.uni.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/post")
@@ -29,3 +26,22 @@ public class PostController {
         return ResponseEntity.ok(savedEmployee);
     }
 }
+
+/*http://localhost:8081/api/post/createPost
+        {
+        "title":"post title",
+        "description":"description"
+        }
+*/
+
+//Adding post along with comment
+/*{
+        "title":"post title",
+        "description":"description",
+        "comments":[
+        {
+        "text":"Super"
+        }
+        ]
+}*/
+

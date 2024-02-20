@@ -4,9 +4,12 @@ import com.learning.springdatajpa.manytomany.model.Employee;
 import com.learning.springdatajpa.manytomany.model.Project;
 import com.learning.springdatajpa.manytomany.repository.EmployeeRepository;
 import com.learning.springdatajpa.manytomany.repository.ProjectRepository;
+import com.learning.springdatajpa.onetomany.bi.model.Author;
 import com.learning.springdatajpa.onetomany.bi.model.Book;
 import com.learning.springdatajpa.onetomany.bi.repository.AuthorRepository;
 import com.learning.springdatajpa.onetomany.bi.repository.BookRepository;
+import com.learning.springdatajpa.onetomany.uni.model.Comment;
+import com.learning.springdatajpa.onetomany.uni.model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,5 +29,15 @@ public class BookService {
         // save Employee
         Book  book = bookRepository.save(entity);
         return book;
+    }
+
+    public Author createBookAndAssignToAuthor(Book entity, Integer authorId) {
+        Author author = authorRepository.getById(authorId);
+
+        author.getBooks().add(entity);
+        Author  savedAuthor = authorRepository.save(author);
+      //  Book  book = bookRepository.save(entity);
+
+        return savedAuthor;
     }
 }

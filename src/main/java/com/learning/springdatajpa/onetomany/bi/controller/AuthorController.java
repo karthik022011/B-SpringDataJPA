@@ -26,3 +26,8 @@ public class AuthorController {
         return ResponseEntity.ok(savedEmployee);
     }
 }
+
+//http://localhost:8081/api/author/createAuthor
+/*{
+        "name":"Karthik"
+}*/
