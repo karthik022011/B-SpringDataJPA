@@ -1,5 +1,6 @@
 package com.learning.springdatajpa.onetomany.bi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 
@@ -14,6 +15,7 @@ public class Book {
     // default fetch type for ManyToOne: EAGER
     @ManyToOne
     @JoinColumn(name = "author_id")
+    @JsonIgnore
     private Author author;
 
     public Long getBookId() {

@@ -31,13 +31,18 @@ public class BookService {
         return book;
     }
 
-    public Book createBookAndAssignToAuthor(Book entity, Integer authorId) {
-        Author author = authorRepository.getById(authorId);
+    public Author createBookAndAssignToAuthor(Book entity, Integer authorId) {
+        // fetch Author
+        Author authorTemp = authorRepository.getById(authorId);
 
-        author.getBooks().add(entity);
-        Author  savedAuthor = authorRepository.save(author);
-        Book  book = bookRepository.save(entity);
+        //set author to book
+        entity.setAuthor(authorTemp);
 
-        return book;
+        // add Book  to Author
+        authorTemp.getBooks().add(entity);
+
+        // save Author
+        Author  savedAuthor = authorRepository.save(authorTemp);
+        return savedAuthor;
     }
 }
