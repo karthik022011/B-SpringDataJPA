@@ -1,8 +1,10 @@
 package com.learning.springdatajpa.manytomany.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -23,10 +25,11 @@ public class Employee {
     @Column(name = "technicalSkill")
     private String technicalSkill;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinTable(name = "EMPLOYEE_PROJECT_MAPPING", joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
-    private Set<Project> projects;
+    private Set<Project> projects = new HashSet<>();
 
     public int getId() {
         return id;

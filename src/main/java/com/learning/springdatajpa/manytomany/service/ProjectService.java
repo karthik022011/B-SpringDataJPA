@@ -26,21 +26,16 @@ public class ProjectService {
 
     public Project assignProjectToEmployees(Integer projId, Integer empId) {
         // get Employee
-        Employee employee = employeeRepository.getById(empId);
+        Employee employee = employeeRepository.findById(empId).get();
 
-        // new Project
-        Project project = this.projectRepository.getById(projId);
+        // Get Project
+        Project project = this.projectRepository.findById(projId).get();
 
-        // create Employee set
-        Set<Employee> employees = new HashSet<>();
-        employees.add(employee);
-
-        // assign Employee Set to Project
-        project.setEmployees(employees);
+        // assign Employee to Project
+        project.getEmployees().add(employee);
 
         // save Project
         Project savedProject = projectRepository.save(project);
-
         return  savedProject;
 
     }
@@ -48,7 +43,7 @@ public class ProjectService {
 
     public Project getProject(Integer projId) {
         // get Project details
-        Project project = projectRepository.getById(projId);
+        Project project = projectRepository.findById(projId).get();
         return project;
     }
 }

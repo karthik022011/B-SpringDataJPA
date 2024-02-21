@@ -20,38 +20,28 @@ public class EmployeeService {
     private ProjectRepository projectRepository;
 
 
-    public Employee createEmployee(@RequestBody Employee entity) {
+    public Employee createEmployee(Employee entity) {
         // save Employee
         Employee  employee = employeeRepository.save(entity);
         return employee;
     }
 
-    public Employee createEmployeeForProject(@RequestBody Employee entity,
-                                           @PathVariable(name = "projId") String projId) {
-        // save Employee
-        Employee employee = employeeRepository.save(entity);
+    public Employee createEmployeeForProject(Employee entity, String projId) {
+        //get a project
+        Project project = projectRepository.findById(Integer.valueOf(projId)).get();
 
-        // get a Project
-        Project project = projectRepository.getById(Integer.valueOf(projId));
+        //Assign project to employee
+        entity.getProjects().add(project);
 
-        // create Employee set
-        Set<Employee> employees = new HashSet<>();
-        employees.add(employee);
-
-        // assign Employee Set to Project
-        project.setEmployees(employees);
-
-        // save Project
-        project = projectRepository.save(project);
-
-        return employee;
-
+        //Save Employee
+        Employee employeeTemp = employeeRepository.save(entity);
+        return employeeTemp;
     }
 
 
-    public Employee getEmployee(@PathVariable(name = "empId") Integer empId) {
+    public Employee getEmployee(Integer empId) {
         // get Employee details
-        Employee employee = this.employeeRepository.getById(empId);
+        Employee employee = this.employeeRepository.findById(empId).get();
         return employee;
     }
 }
